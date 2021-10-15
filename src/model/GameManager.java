@@ -12,9 +12,10 @@ public class GameManager {
 	
 	public GameManager() {
 		remainingTime = 251;
-		roundColdDown = 0;
-		round = ROUND_COLDOWN;
+		roundColdDown = ROUND_COLDOWN;
+		round = 0;
 		
+		calculateTimeLeft();
 		startRound();
 	}
 	
@@ -26,7 +27,7 @@ public class GameManager {
 		}
 	}
 	
-	public void startRound() {
+	public void calculateTimeLeft(){
 		new Thread(
 				()->{
 					while(remainingTime > 0) {
@@ -38,6 +39,28 @@ public class GameManager {
 						}
 					}
 					
+				}).start();
+	}
+	
+	public void startRound() {
+		new Thread(
+				()->{
+					while(roundColdDown >= 0) {
+						roundColdDown--;
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						if(roundColdDown == 0) {
+							
+							round++;
+							if(player1!= null) {
+								player1.getIncomingEnemies().add(new Enemy(1));
+							}
+							roundColdDown = ROUND_COLDOWN;
+						}
+					}					
 				}).start();
 	}
 	
