@@ -26,8 +26,53 @@ public class Tower {
 		}
 		
 		this.owner = owner;
-		attack();
+		
+		
+		attackType2();
+		
+		
+		//getTarget();
 	}
+
+	private void attackType2() {
+		new Thread(
+				()->{
+				while(true) {
+					System.out.println(owner.getIncomingEnemies().size());
+					
+					if(owner.getIncomingEnemies().size() > 0) {
+						
+						for (int i = 0; i < owner.getIncomingEnemies().size() && owner.getIncomingEnemies().get(i).isAlive(); i++) {
+							int distance = distanceBetween(owner.getIncomingEnemies().get(i).getPosX(), posX, owner.getIncomingEnemies().get(i).getPosY(), posY);
+							if(distance <= attackRange) {
+								
+								try {
+									
+									owner.getIncomingEnemies().get(i).setHealth(owner.getIncomingEnemies().get(i).getHealth()-damage);
+									if(owner.getIncomingEnemies().get(i).getHealth()<=0) {
+										owner.getIncomingEnemies().get(i).setAlive(false);
+									}
+									Thread.sleep(700);
+								}catch(InterruptedException e) {
+									
+								}
+								
+								
+							}
+						}
+					}
+				}
+			}).start();
+		
+	}
+
+	/*private void getTarget() {
+		
+		if(owner.getIncomingEnemies().size()>0) {
+			int indexTarget = owner.getIncomingEnemies().size()-1;
+		}
+		
+	}*/
 
 	//Getters
 	
@@ -49,25 +94,23 @@ public class Tower {
 		
 		new Thread(
 			()->{			
-				try {
-					while(owner.getIncomingEnemies().size() > 0) {
-						int min = 2000;
-						int index = 0;
-						for (int i = 0; i < owner.getIncomingEnemies().size(); i++) {
+				
+				while(owner.getIncomingEnemies().size() > 0) {
+						
+					int min = 2000;
+					int index = -1;
+					for (int i = 0; i < owner.getIncomingEnemies().size() ; i++) {
+						if(owner.getIncomingEnemies().get(i).isAlive()) {
 							int distance = distanceBetween(owner.getIncomingEnemies().get(i).getPosX(), posX, owner.getIncomingEnemies().get(i).getPosY(), posY);
-							//System.out.println(distance);
+							
 							if (distance< min) {
 								min = distance;
-								index = i;
-									
+								targetedEnemy = owner.getIncomingEnemies().get(i);
+								//System.out.println(targetedEnemy == null);
 							}
 						}
-					targetedEnemy = owner.getIncomingEnemies().get(index);
-					System.out.println("Target index: "+ index);	
+						
 					}
-					Thread.sleep(400);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
 				}
 			}).start();
 	}
@@ -81,21 +124,55 @@ public class Tower {
 	}
 	
 	public void attack() {
-	new Thread(()->{
+		new Thread(()->{
+			/*		while(true) {
+			System.out.println(targetedEnemy == null);
+					if(targetedEnemy != null && targetedEnemy.isAlive()) {	
+						try {
+							targetedEnemy.setHealth(targetedEnemy.getHealth()-damage);
+							if(targetedEnemy.getHealth() <= 0) {
+								targetedEnemy.setAlive(false);
+								
+							}
+							Thread.sleep(700);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+			}*/
+		/*	while(true) {
+								
+				if(targetedEnemy!= null && targetedEnemy.isAlive() && distanceBetween(targetedEnemy.getPosX(), posX, targetedEnemy.getPosY(), posY) < attackRange) {
+					try {
+						targetedEnemy.setHealth(targetedEnemy.getHealth()-damage);
+						if(targetedEnemy.getHealth() <= 0) {
+							targetedEnemy.setAlive(false);
+							
+						}
+						Thread.sleep(700);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+				*/
 			try {
 				
-				if(targetedEnemy!= null && targetedEnemy.isAlive()) {
+				while(targetedEnemy!= null) {
+					System.out.println("TRYING TO ATTACK????");
 					int dif = distanceBetween(targetedEnemy.getPosX(), posX, targetedEnemy.getPosY(), posY);
-					System.out.println("*** "+targetedEnemy.isAlive()+"; dif: "+dif+"; "+targetedEnemy.getHealth());
-					if(targetedEnemy.isAlive() && dif <= attackRange) {
-						
+					
+					if(dif <= attackRange && targetedEnemy.isAlive()) {
+						System.out.println("ATTACKED");
 						targetedEnemy.setHealth(targetedEnemy.getHealth()-damage);
 						if(targetedEnemy.getHealth() <= 0) {
 							targetedEnemy.setAlive(false);
 						}
 					}
 					if(type==1) {
-						Thread.sleep(800);
+						Thread.sleep(700);
 					}else {
 						Thread.sleep(1000);
 					}
@@ -103,17 +180,28 @@ public class Tower {
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-		}
-	}).start();		
-}
+			}
+			}).start();		
+	}
+	
 
 	public Enemy gettargetedEnemy() {
 		return targetedEnemy;
 	}
 
 	public void settargetedEnemy(Enemy targetedEnemy) {
-		this.targetedEnemy = targetedEnemy;
+		//this.targetedEnemy = targetedEnemy;
 	}
+
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+	
+	
 	
 	
 }

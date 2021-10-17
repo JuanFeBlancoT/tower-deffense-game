@@ -20,12 +20,12 @@ public class Enemy {
 		this.posY = posY;;
 		
 		if(this.type == 1) {
-			health = 18;
-			damage = 4;
+			health = 15;
+			damage = 6;
 			speed = 3;
 		}else {
-			health = 22;
-			damage = 6;
+			health = 20;
+			damage = 7;
 			speed = 2; 
 		}
 	}

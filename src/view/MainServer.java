@@ -39,13 +39,16 @@ public class MainServer extends PApplet{
 	private void drawEnemies() {
 		if(gm.getPlayer1() != null) {
 			for (int i = 0; i < gm.getPlayer1().getIncomingEnemies().size(); i++) {
-				if(gm.getPlayer1().getIncomingEnemies().get(i).isAlive()) {
+				//if(gm.getPlayer1().getIncomingEnemies().get(i).isAlive()) {
+					fill(255);
 					circle(gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY(), 30);
 					gm.getPlayer1().getIncomingEnemies().get(i).move();
+					fill(0);
+					text(gm.getPlayer1().getIncomingEnemies().get(i).getHealth()+"; "+i+"; "+gm.getPlayer1().getIncomingEnemies().get(i).isAlive(), gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY());
 					//System.out.println(gm.getPlayer1().getIncomingEnemies().get(i).getHealth());
 				}
 				
-			}
+			//}
 		}
 		
 		if(gm.getPlayer2() != null) {

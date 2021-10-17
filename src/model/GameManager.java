@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class GameManager {
-
-	public final int ROUND_COLDOWN =23;
+	//23
+	public final int ROUND_COLDOWN = 24;
 	private int remainingTime;
 	private int round;
 	private int roundColdDown;
@@ -76,10 +76,15 @@ public class GameManager {
 			()->{
 				ArrayList<Enemy> enemies1 = new ArrayList<>();
 				ArrayList<Enemy> enemies2 = new ArrayList<>();
+				int numEnem = 0;
+				if(round <=4) {
+					numEnem = (int) (Math.random()*round)+round;
+				}else {
+					numEnem = (int) (Math.random()*round)+round/2;
+				}
 				
-				int numEnem = (int) (Math.random()*round)+ round;
-				if(numEnem > 10) {
-					numEnem = 10;
+				if(numEnem > 12) {
+					numEnem = 12;
 				}
 				
 				for (int i = 0; i < numEnem; i++) {
@@ -92,7 +97,7 @@ public class GameManager {
 					enemies2.add(new Enemy(type, player2, 825, posY));
 					
 				}
-				System.out.println("*****nums: "+numEnem);
+
 				player1.setIncomingEnemies(enemies1);
 				player2.setIncomingEnemies(enemies2);
 				
