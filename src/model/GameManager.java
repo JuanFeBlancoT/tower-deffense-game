@@ -13,7 +13,7 @@ public class GameManager {
 	private Player player2;
 	
 	public GameManager() {
-		remainingTime = 251;
+		remainingTime = 240;
 		roundColdDown = ROUND_COLDOWN;
 		round = 0;
 		
@@ -59,6 +59,9 @@ public class GameManager {
 						if(roundColdDown == 0) {
 							
 							round++;
+							player1.setMoney(player1.getMoney()+35);
+							player2.setMoney(player2.getMoney()+35);
+							
 							if(player1!= null) {
 								player1.getIncomingEnemies().clear();
 								player2.getIncomingEnemies().clear();

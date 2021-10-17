@@ -98,7 +98,7 @@ public class Tower {
 				while(owner.getIncomingEnemies().size() > 0) {
 						
 					int min = 2000;
-					int index = -1;
+					//int index = -1;
 					for (int i = 0; i < owner.getIncomingEnemies().size() ; i++) {
 						if(owner.getIncomingEnemies().get(i).isAlive()) {
 							int distance = distanceBetween(owner.getIncomingEnemies().get(i).getPosX(), posX, owner.getIncomingEnemies().get(i).getPosY(), posY);

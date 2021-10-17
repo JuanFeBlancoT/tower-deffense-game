@@ -21,8 +21,19 @@ public class Player {
 	}
 	
 	public void addTower(int type, int posX, int posY) {
-		Tower towerX = new Tower(type, posX, posY, this);
-		towers.add(towerX);
+		boolean canCreate = false;
+		if(type == 1 && money >= 100) {
+			money-=100;
+			canCreate = true;
+		}else if(type == 2 && money >= 120) {
+			money-=120;
+			canCreate = true;
+		}
+		
+		if(canCreate) {
+			Tower towerX = new Tower(type, posX, posY, this);
+			towers.add(towerX);
+		}
 	}
 	
 	public void removeEnemy(Enemy targeted) {
@@ -70,6 +81,14 @@ public class Player {
 		for (int i = 0; i < towers.size(); i++) {
 			towers.get(i).settargetedEnemy(null);
 		}	
+	}
+
+	public double getMoney() {
+		return money;
+	}
+
+	public void setMoney(double money) {
+		this.money = money;
 	}
 
 	

@@ -38,13 +38,13 @@ public class MainServer extends PApplet{
 
 	private void drawEnemies() {
 		if(gm.getPlayer1() != null) {
-			for (int i = 0; i < gm.getPlayer1().getIncomingEnemies().size(); i++) {
+			for (int i = 0; i < gm.getPlayer1().getIncomingEnemies().size() && gm.getPlayer1().getIncomingEnemies().get(i).isAlive() ; i++) {
 				//if(gm.getPlayer1().getIncomingEnemies().get(i).isAlive()) {
 					fill(255);
 					circle(gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY(), 30);
 					gm.getPlayer1().getIncomingEnemies().get(i).move();
 					fill(0);
-					text(gm.getPlayer1().getIncomingEnemies().get(i).getHealth()+"; "+i+"; "+gm.getPlayer1().getIncomingEnemies().get(i).isAlive(), gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY());
+					//text(gm.getPlayer1().getIncomingEnemies().get(i).getHealth()+"; "+i+"; "+gm.getPlayer1().getIncomingEnemies().get(i).isAlive(), gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY());
 					//System.out.println(gm.getPlayer1().getIncomingEnemies().get(i).getHealth());
 				}
 				
@@ -52,7 +52,7 @@ public class MainServer extends PApplet{
 		}
 		
 		if(gm.getPlayer2() != null) {
-			for (int i = 0; i < gm.getPlayer2().getIncomingEnemies().size(); i++) {
+			for (int i = 0; i < gm.getPlayer2().getIncomingEnemies().size() && gm.getPlayer2().getIncomingEnemies().get(i).isAlive(); i++) {
 				fill(40,40,40);
 				circle(gm.getPlayer2().getIncomingEnemies().get(i).getPosX(), gm.getPlayer2().getIncomingEnemies().get(i).getPosY(), 30);
 				gm.getPlayer2().getIncomingEnemies().get(i).move();
@@ -81,8 +81,9 @@ public class MainServer extends PApplet{
 	}
 
 	private void drawGmPlayerScreens() {
-		//System.out.println(mouseX+","+mouseY);
 		if(gm.getPlayer1() != null) {
+			fill(0);
+			text(gm.getPlayer1().getMoney()+"",650,250);
 			fill(200,100,100);
 			rect(0, 0, 500, 700);
 			fill(150,70,70);
