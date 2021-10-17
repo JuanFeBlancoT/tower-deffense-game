@@ -32,21 +32,26 @@ public class MainServer extends PApplet{
 		drawUIBaseElements();
 		drawTowers();
 		drawEnemies();
+		
+		text(gm.getPlayer1().getHealth(), 700, 150);
 	}
 
 	private void drawEnemies() {
 		if(gm.getPlayer1() != null) {
 			for (int i = 0; i < gm.getPlayer1().getIncomingEnemies().size(); i++) {
-				fill(40,40,40);
-				circle(gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY(), 30);
-				gm.getPlayer1().getIncomingEnemies().get(i).move();
+				if(gm.getPlayer1().getIncomingEnemies().get(i).isAlive()) {
+					circle(gm.getPlayer1().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY(), 30);
+					gm.getPlayer1().getIncomingEnemies().get(i).move();
+					//System.out.println(gm.getPlayer1().getIncomingEnemies().get(i).getHealth());
+				}
+				
 			}
 		}
 		
 		if(gm.getPlayer2() != null) {
 			for (int i = 0; i < gm.getPlayer2().getIncomingEnemies().size(); i++) {
 				fill(40,40,40);
-				circle(gm.getPlayer2().getIncomingEnemies().get(i).getPosX(), gm.getPlayer1().getIncomingEnemies().get(i).getPosY(), 30);
+				circle(gm.getPlayer2().getIncomingEnemies().get(i).getPosX(), gm.getPlayer2().getIncomingEnemies().get(i).getPosY(), 30);
 				gm.getPlayer2().getIncomingEnemies().get(i).move();
 			}
 		}
@@ -55,7 +60,7 @@ public class MainServer extends PApplet{
 	private void drawTowers() {
 		if(gm.getPlayer1() != null) {
 			for (int i = 0; i < gm.getPlayer1().getTowers().size(); i++) {
-				fill(180,80,80);
+				fill(180,80,80,60);
 				circle(gm.getPlayer1().getTowers().get(i).getPosX(), gm.getPlayer1().getTowers().get(i).getPosY(), gm.getPlayer1().getTowers().get(i).getAttackRange()*2);
 				fill(255);
 				circle(gm.getPlayer1().getTowers().get(i).getPosX(), gm.getPlayer1().getTowers().get(i).getPosY(), 20);
@@ -73,14 +78,40 @@ public class MainServer extends PApplet{
 	}
 
 	private void drawGmPlayerScreens() {
+		//System.out.println(mouseX+","+mouseY);
 		if(gm.getPlayer1() != null) {
 			fill(200,100,100);
 			rect(0, 0, 500, 700);
+			fill(150,70,70);
+			rect(100, 0, 50, 200);
+			rect(100, 200, 350, 50);
+			rect(400, 250, 50, 50);
+			rect(200, 300, 250, 50);
+			rect(200, 350, 50, 50);
+			rect(200, 400, 250, 50);
+			rect(400, 450, 50, 50);
+			rect(50, 500, 400, 50);
+			rect(50, 550, 50, 50);
+			rect(50, 600, 250, 50);
+			rect(250, 650, 50, 50);
 		}
 		
 		if(gm.getPlayer2() != null) {
 			fill(100,100,200);
 			rect(700, 0, 500, 700);
+			
+			fill(70,70,150);
+			rect(800, 0, 50, 200);
+			rect(800, 200, 350, 50);
+			rect(1100, 250, 50, 50);
+			rect(900, 300, 250, 50);
+			rect(900, 350, 50, 50);
+			rect(900, 400, 250, 50);
+			rect(1100, 450, 50, 50);
+			rect(750, 500, 400, 50);
+			rect(750, 550, 50, 50);
+			rect(750, 600, 250, 50);
+			rect(950, 650, 50, 50);
 		}
 	}
 	

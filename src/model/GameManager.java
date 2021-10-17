@@ -1,8 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+
 public class GameManager {
 
-	public final int ROUND_COLDOWN = 25;
+	public final int ROUND_COLDOWN =23;
 	private int remainingTime;
 	private int round;
 	private int roundColdDown;
@@ -17,13 +19,14 @@ public class GameManager {
 		
 		calculateTimeLeft();
 		startRound();
+		
 	}
 	
 	public void createPlayer() {
 		if (player1 == null) {
-			player1 = new Player();
+			player1 = new Player(1);
 		}else {
-			player2 = new Player();
+			player2 = new Player(2);
 		}
 	}
 	
@@ -52,11 +55,15 @@ public class GameManager {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
+						
 						if(roundColdDown == 0) {
 							
 							round++;
 							if(player1!= null) {
-								player1.getIncomingEnemies().add(new Enemy(1));
+								player1.getIncomingEnemies().clear();
+								player2.getIncomingEnemies().clear();
+								addEnemies();
+								
 							}
 							roundColdDown = ROUND_COLDOWN;
 						}
@@ -64,8 +71,34 @@ public class GameManager {
 				}).start();
 	}
 	
-	public boolean addEnemies(int playerIdentifier, int enemyType) {
-		return false;
+	public void addEnemies() {
+		new Thread(
+			()->{
+				ArrayList<Enemy> enemies1 = new ArrayList<>();
+				ArrayList<Enemy> enemies2 = new ArrayList<>();
+				
+				int numEnem = (int) (Math.random()*round)+ round;
+				if(numEnem > 10) {
+					numEnem = 10;
+				}
+				
+				for (int i = 0; i < numEnem; i++) {
+					int type = (int)((Math.random()*2)+1);
+					if(type > 2) {
+						type = 2;
+					}
+					int posY = -i*50;
+					enemies1.add(new Enemy(type, player1, 125, posY));
+					enemies2.add(new Enemy(type, player2, 825, posY));
+					
+				}
+				System.out.println("*****nums: "+numEnem);
+				player1.setIncomingEnemies(enemies1);
+				player2.setIncomingEnemies(enemies2);
+				
+				player1.activateTowers();
+				player2.activateTowers();
+		}).start();
 	}
 	
 	public boolean createTower(int playerIdentifier, int type, int posX, int posY) {
