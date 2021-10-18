@@ -8,8 +8,10 @@ public class MainServer extends PApplet{
 	public static void main(String[] args) {
 		PApplet.main("view.MainServer");
 	}
-
+	//object in charge of administrating the game
 	GameManager gm;
+	//Object in charge of the communication
+	Communication com;
 	
 	public void settings() {
 		size(1200,700);
@@ -19,11 +21,23 @@ public class MainServer extends PApplet{
 		//UI setup
 		noStroke();
 		
-		
-		//actual game setup
+		//technical setup
+		com = Communication.ComgetInstance();
+		com.setMainServer(this);
+		com.start();
 		gm = new GameManager();
-		gm.createPlayer();
-		gm.createPlayer();
+		
+		//gm.createPlayer();
+		//gm.createPlayer();
+	}
+	
+	public void createPlayer() {
+		if(gm.getPlayer1()==null) {
+			gm.createPlayer();
+			
+		}else {
+			gm.createPlayer();
+		}
 	}
 	
 	public void draw() {
@@ -33,7 +47,7 @@ public class MainServer extends PApplet{
 		drawTowers();
 		drawEnemies();
 		
-		text(gm.getPlayer1().getHealth(), 700, 150);
+		//text(gm.getPlayer1().getHealth(), 700, 150);
 	}
 
 	private void drawEnemies() {
@@ -73,9 +87,9 @@ public class MainServer extends PApplet{
 		if(gm.getPlayer2() != null) {
 			for (int i = 0; i < gm.getPlayer2().getTowers().size(); i++) {
 				fill(180,80,80);
-				circle(gm.getPlayer2().getTowers().get(i).getPosX(), gm.getPlayer1().getTowers().get(i).getPosY(), gm.getPlayer1().getTowers().get(i).getAttackRange()*2);
+				circle(gm.getPlayer2().getTowers().get(i).getPosX(), gm.getPlayer2().getTowers().get(i).getPosY(), gm.getPlayer2().getTowers().get(i).getAttackRange()*2);
 				fill(255);
-				circle(gm.getPlayer2().getTowers().get(i).getPosX(), gm.getPlayer1().getTowers().get(i).getPosY(), 20);
+				circle(gm.getPlayer2().getTowers().get(i).getPosX(), gm.getPlayer2().getTowers().get(i).getPosY(), 20);
 			}
 		}
 	}

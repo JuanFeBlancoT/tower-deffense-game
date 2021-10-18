@@ -3,11 +3,12 @@ package model;
 import java.util.ArrayList;
 
 public class GameManager {
-	//23
+	
 	public final int ROUND_COLDOWN = 24;
 	private int remainingTime;
 	private int round;
 	private int roundColdDown;
+	private int screen = 1;
 	
 	private Player player1;
 	private Player player2;
@@ -41,6 +42,7 @@ public class GameManager {
 							e.printStackTrace();
 						}
 					}
+					screen = 2;
 					
 				}).start();
 	}
