@@ -101,7 +101,7 @@ public class MainServer extends PApplet{
 			textSize(14);
 			fill(255);
 			text("money player 1:\n"+gm.getPlayer1().getMoney()+"",600,275);
-			text("Health player 1:\n"+gm.getPlayer1().getMoney()+"",600,320);
+			text("Health player 1:\n"+gm.getPlayer1().getHealth()+"",600,320);
 			fill(0);
 			fill(200,100,100);
 			rect(0, 0, 500, 700);
@@ -123,8 +123,8 @@ public class MainServer extends PApplet{
 			
 			textSize(14);
 			fill(255);
-			text("money player 2:\n"+gm.getPlayer1().getMoney()+"",600,360);
-			text("Health player 2:\n"+gm.getPlayer1().getMoney()+"",600,400);
+			text("money player 2:\n"+gm.getPlayer2().getMoney()+"",600,360);
+			text("Health player 2:\n"+gm.getPlayer2().getHealth()+"",600,400);
 			fill(100,100,200);
 			rect(700, 0, 500, 700);
 			
@@ -160,5 +160,13 @@ public class MainServer extends PApplet{
 
 	public void setScreen(int i) {
 		gm.setScreen(i);
+	}
+
+	public void onMessage(int x, int y, int idSener) {
+		if(idSener == 1) {
+			gm.getPlayer1().addTower(1, x, y);
+		}else {
+			gm.getPlayer2().addTower(1, x, y);
+		}
 	}
 }

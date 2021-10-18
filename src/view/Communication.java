@@ -40,12 +40,12 @@ public class Communication extends Thread{
 				Socket connection = ss.accept();
 				System.out.println("PLAYER CONNECTED...");
 				if(session1 == null) {
-					session1 = new Session(connection, observer);
+					session1 = new Session(connection, observer, 1, mainServer);
 					this.mainServer.createPlayer();
 					session1.start();
 					
 				}else {
-					session2 = new Session(connection, observer);	
+					session2 = new Session(connection, observer, 2, mainServer);	
 					this.mainServer.createPlayer();
 					this.mainServer.setScreen(2);
 					session2.start();					

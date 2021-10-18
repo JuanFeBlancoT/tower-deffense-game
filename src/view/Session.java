@@ -15,10 +15,14 @@ public class Session extends Thread{
 	private BufferedWriter bfw;
 	private Socket connection;
 	private IObserver obs;
+	private MainServer mainServ;
+	int idSener;
 	
-	public Session(Socket ss, IObserver obs) {
+	public Session(Socket ss, IObserver obs, int id, MainServer ms) {
+		mainServ = ms;
 		connection = ss;
 		this.obs = obs;
+		idSener = id;
 	}
 	
 	public void run() {
@@ -42,7 +46,8 @@ public class Session extends Thread{
 				String[] coordinates = message.split(";");
 				int px = Integer.parseInt(coordinates[0])/2;
 				int py = (Integer.parseInt(coordinates[1])/2);
-				System.out.println("****"+px+","+py);
+				//System.out.println("****"+px+","+py);
+				mainServ.onMessage(px, py, idSener);
 			}
 			
 		} catch (IOException e) {

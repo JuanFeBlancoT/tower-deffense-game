@@ -1,5 +1,5 @@
 package view;
 
 public interface IObserver {
-	public void onMessage(String message);
+	public void onMessage(String message, int id);
 }
