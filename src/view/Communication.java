@@ -36,21 +36,21 @@ public class Communication extends Thread{
 			
 			while(session1 == null || session2 == null) {
 				System.out.println("CONNECTING...");
-				if(session1 == null) {
-					Socket connection = ss.accept();
-					System.out.println("PLAYER 1 CONNECTED...");
-					session1 = new Session(connection, observer);
-					session1.start();
 				
+				Socket connection = ss.accept();
+				System.out.println("PLAYER CONNECTED...");
+				if(session1 == null) {
+					session1 = new Session(connection, observer);
+					this.mainServer.createPlayer();
+					session1.start();
+					
 				}else {
-					Socket connection = ss.accept();
-					System.out.println("PLAYER 2 CONNECTED...");
 					session2 = new Session(connection, observer);	
+					this.mainServer.createPlayer();
 					this.mainServer.setScreen(2);
-					session2.start();
-					
-					
+					session2.start();					
 				}
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

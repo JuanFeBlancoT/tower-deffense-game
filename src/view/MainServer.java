@@ -97,8 +97,12 @@ public class MainServer extends PApplet{
 
 	private void drawGmPlayerScreens() {
 		if(gm.getPlayer1() != null) {
+			
+			textSize(14);
+			fill(255);
+			text("money player 1:\n"+gm.getPlayer1().getMoney()+"",600,275);
+			text("Health player 1:\n"+gm.getPlayer1().getMoney()+"",600,320);
 			fill(0);
-			text(gm.getPlayer1().getMoney()+"",650,250);
 			fill(200,100,100);
 			rect(0, 0, 500, 700);
 			fill(150,70,70);
@@ -116,6 +120,11 @@ public class MainServer extends PApplet{
 		}
 		
 		if(gm.getPlayer2() != null) {
+			
+			textSize(14);
+			fill(255);
+			text("money player 2:\n"+gm.getPlayer1().getMoney()+"",600,360);
+			text("Health player 2:\n"+gm.getPlayer1().getMoney()+"",600,400);
 			fill(100,100,200);
 			rect(700, 0, 500, 700);
 			
