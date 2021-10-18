@@ -164,9 +164,9 @@ public class MainServer extends PApplet{
 
 	public void onMessage(int x, int y, int idSener) {
 		if(idSener == 1) {
-			gm.getPlayer1().addTower(1, x, y);
+			gm.getPlayer1().addTower(1, x, y, 1);
 		}else {
-			gm.getPlayer2().addTower(1, x, y);
+			gm.getPlayer2().addTower(1, x, y, 2);
 		}
 	}
 }

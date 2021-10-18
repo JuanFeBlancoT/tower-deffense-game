@@ -20,7 +20,7 @@ public class Player {
 		incomingEnemies = new ArrayList<>();
 	}
 	
-	public void addTower(int type, int posX, int posY) {
+	public void addTower(int type, int posX, int posY, int origin) {
 		boolean canCreate = false;
 		if(type == 1 && money >= 100) {
 			money-=100;
@@ -31,8 +31,14 @@ public class Player {
 		}
 		
 		if(canCreate) {
-			Tower towerX = new Tower(type, posX, posY, this);
-			towers.add(towerX);
+			if(origin == 1) {
+				Tower towerX = new Tower(type, posX, posY, this);
+				towers.add(towerX);
+			}else {
+				Tower towerX = new Tower(type, (posX)+700, posY, this);
+				towers.add(towerX);
+			}
+			
 		}
 	}
 	
