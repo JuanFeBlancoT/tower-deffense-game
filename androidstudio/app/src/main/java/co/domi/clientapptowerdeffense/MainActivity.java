@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements  MsgListener{
 
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements  MsgListener{
         addBtn.setOnClickListener(
                 (view)->{
                     waitingP = !waitingP;
+                    if(waitingP){
+                        Toast.makeText(this, "Waiting to add", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(this, "Press to add", Toast.LENGTH_SHORT).show();
+                    }
                 }
         );
 
