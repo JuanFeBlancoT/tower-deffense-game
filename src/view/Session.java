@@ -22,7 +22,7 @@ public class Session extends Thread{
 	}
 	
 	public void run() {
-		
+		startSession();
 	}
 	
 	public void startSession() {
@@ -38,6 +38,11 @@ public class Session extends Thread{
 			
 			while(true) {
 				String message = bfr.readLine();
+				//System.out.println(message);
+				String[] coordinates = message.split(";");
+				int px = Integer.parseInt(coordinates[0])/2;
+				int py = (Integer.parseInt(coordinates[1])/2);
+				System.out.println("****"+px+","+py);
 			}
 			
 		} catch (IOException e) {

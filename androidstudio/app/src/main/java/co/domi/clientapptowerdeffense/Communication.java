@@ -65,7 +65,7 @@ public class Communication extends Thread{
         new Thread(
                 ()->{
                     try {
-                        bfw.write(msg+"\n");
+                        bfw.write(msg);
                         bfw.flush();
                     } catch (IOException e) {
                         e.printStackTrace();

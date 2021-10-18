@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements  MsgListener{
                         if(event.getAction() == MotionEvent.ACTION_DOWN){
                             px = (int) event.getX();
                             py = (int) event.getY();
+                            com.sendMessage(px+";"+py+"\n");
                         }
                     return false;
                 }
