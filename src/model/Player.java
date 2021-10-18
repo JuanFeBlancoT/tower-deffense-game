@@ -22,6 +22,7 @@ public class Player {
 	
 	public void addTower(int type, int posX, int posY, int origin) {
 		boolean canCreate = false;
+		//toewer type definition
 		if(type == 1 && money >= 100) {
 			money-=100;
 			canCreate = true;
@@ -31,6 +32,7 @@ public class Player {
 		}
 		
 		if(canCreate) {
+			//player identifier
 			if(origin == 1) {
 				Tower towerX = new Tower(type, posX, posY, this);
 				towers.add(towerX);
