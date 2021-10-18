@@ -63,8 +63,7 @@ public class Player {
 	}
 
 	public void activateTowers() {
-		//System.out.println(id+"; incoming enemies size: "+incomingEnemies.size());
-		//System.out.println(id+"; Towers array size: "+ towers.size());
+		//restart the towers calculations
 		for (int i = 0; i < towers.size(); i++) {
 			towers.get(i).calculateNearestEnemy();
 			towers.get(i).setOwner(this);

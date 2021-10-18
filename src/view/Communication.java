@@ -17,14 +17,11 @@ public class Communication extends Thread{
 	}
 	
 	public static Communication ComgetInstance() {
-		
+		 	
 		if(com == null) {
 			com = new Communication();
-			com.start();
 		}
-		
 		return com;
-		
 	}
 	
 	public void run() {
@@ -34,15 +31,25 @@ public class Communication extends Thread{
 	public void startServer() {
 		try {
 			ServerSocket ss = new ServerSocket(8000);
+			System.out.println("WAITING CONNECTIONS...");
+			
+			
 			while(session1 == null || session2 == null) {
+				System.out.println("CONNECTING...");
 				if(session1 == null) {
 					Socket connection = ss.accept();
+					System.out.println("PLAYER 1 CONNECTED...");
 					session1 = new Session(connection, observer);
 					session1.start();
+				
 				}else {
 					Socket connection = ss.accept();
+					System.out.println("PLAYER 2 CONNECTED...");
 					session2 = new Session(connection, observer);	
+					this.mainServer.setScreen(2);
 					session2.start();
+					
+					
 				}
 			}
 		} catch (IOException e) {

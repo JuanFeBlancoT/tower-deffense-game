@@ -17,10 +17,7 @@ public class GameManager {
 		remainingTime = 240;
 		roundColdDown = ROUND_COLDOWN;
 		round = 0;
-		
-		calculateTimeLeft();
-		startRound();
-		
+	
 	}
 	
 	public void createPlayer() {
@@ -135,6 +132,16 @@ public class GameManager {
 
 	public Player getPlayer2() {
 		return player2;
+	}
+
+	public int getScreen() {
+		return screen;
+	}
+
+	public void setScreen(int screen) {
+		this.screen = screen;
+		calculateTimeLeft();
+		startRound();
 	}
 	
 	

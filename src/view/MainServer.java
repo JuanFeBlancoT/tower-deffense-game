@@ -37,6 +37,7 @@ public class MainServer extends PApplet{
 			
 		}else {
 			gm.createPlayer();
+			
 		}
 	}
 	
@@ -137,12 +138,18 @@ public class MainServer extends PApplet{
 		textSize(30);
 		textAlign(CENTER);
 		fill(255);
-		text(gm.getRemainingTime(), 600, 50);
+		text("Remaining\ntime: ", 600, 30);
+		text(gm.getRemainingTime(), 600, 120);
 		//coldown
-		text(gm.getRoundColdDown(), 600, 100);
+		text("Next round: ", 600, 190);
+		text(gm.getRoundColdDown(), 600, 230);
 	}
 	
 	public void mousePressed() {
-		gm.getPlayer1().addTower(1, mouseX, mouseY);
+		//gm.getPlayer1().addTower(1, mouseX, mouseY);
+	}
+
+	public void setScreen(int i) {
+		gm.setScreen(i);
 	}
 }

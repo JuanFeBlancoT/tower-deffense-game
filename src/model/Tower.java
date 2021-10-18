@@ -66,15 +66,7 @@ public class Tower {
 		
 	}
 
-	/*private void getTarget() {
-		
-		if(owner.getIncomingEnemies().size()>0) {
-			int indexTarget = owner.getIncomingEnemies().size()-1;
-		}
-		
-	}*/
 
-	//Getters
 	
 	public int getPosX() {
 		return posX;
@@ -125,39 +117,7 @@ public class Tower {
 	
 	public void attack() {
 		new Thread(()->{
-			/*		while(true) {
-			System.out.println(targetedEnemy == null);
-					if(targetedEnemy != null && targetedEnemy.isAlive()) {	
-						try {
-							targetedEnemy.setHealth(targetedEnemy.getHealth()-damage);
-							if(targetedEnemy.getHealth() <= 0) {
-								targetedEnemy.setAlive(false);
-								
-							}
-							Thread.sleep(700);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-			}*/
-		/*	while(true) {
-								
-				if(targetedEnemy!= null && targetedEnemy.isAlive() && distanceBetween(targetedEnemy.getPosX(), posX, targetedEnemy.getPosY(), posY) < attackRange) {
-					try {
-						targetedEnemy.setHealth(targetedEnemy.getHealth()-damage);
-						if(targetedEnemy.getHealth() <= 0) {
-							targetedEnemy.setAlive(false);
-							
-						}
-						Thread.sleep(700);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-				*/
+	
 			try {
 				
 				while(targetedEnemy!= null) {
